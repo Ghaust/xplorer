@@ -1,33 +1,30 @@
 //
-//  FormViewController.swift
+//  ListViewController.swift
 //  Xplorer
 //
-//  Created by Joseph-Emmanuel Banzio on 08/02/2019.
+//  Created by Joseph-Emmanuel Banzio on 20/03/2019.
 //  Copyright © 2019 Joseph-Emmanuel Banzio. All rights reserved.
 //
 
 import UIKit
 
-class ListViewController: UIViewController {
-
-    @IBOutlet weak var songIcon: UIImageView!
-    @IBOutlet weak var songInfos: UITextView!
+class ListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        <#code#>
     }
-    */
-
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ListViewCell") as! ListViewCell
+        return cell
+    }
+    
 }
