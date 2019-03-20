@@ -11,28 +11,34 @@
 //   let welcome = try? newJSONDecoder().decode(Welcome.self, from: jsonData)
 
 import Foundation
+import ObjectMapper
 
-
-
-class WorldTime : Codable {
-    let weekNumber, utcOffset, unixtime, timezone: String
-    let dstUntil, dstFrom: String
-    let dst: Bool
-    let dayOfYear, dayOfWeek: Int
-    let datetime, abbreviation: String
+class WorldTime : NSObject, Mappable {
     
+    var weekNumber, utcOffset, unixtime, timezone, dstUntil, dstFrom, datetime, abbreviation: String?
+    var dst: Bool?
+    var dayOfYear, dayOfWeek: Int?
    
-    init(weekNumber: String, utcOffset: String, unixtime: String, timezone: String, dstUntil: String, dstFrom: String, dst: Bool, dayOfYear: Int, dayOfWeek: Int, datetime: String, abbreviation: String) {
-        self.weekNumber = weekNumber
-        self.utcOffset = utcOffset
-        self.unixtime = unixtime
-        self.timezone = timezone
-        self.dstUntil = dstUntil
-        self.dstFrom = dstFrom
-        self.dst = dst
-        self.dayOfYear = dayOfYear
-        self.dayOfWeek = dayOfWeek
-        self.datetime = datetime
-        self.abbreviation = abbreviation
+    override init(){
+        super.init()
     }
+    
+    convenience required init?(map: Map) {
+        self.init()
+    }
+    
+    func mapping(map: Map) {
+        weekNumber <- map["week_number"]
+        datetime <- map["datetime"]
+        dstUntil <- map["dst_until"]
+        dstFrom <- map["dst_from"]
+        utcOffset <- map["utc_offset"]
+        timezone <- map["timezone"]
+        dst <- map["dst"]
+        abbreviation <- map["abbreviation"]
+        dayOfWeek <- map["day_of_week"]
+        dayOfYear <- map["day_of_year"]
+        unixtime <- map["unixtime"]
+    }
+    
 }
