@@ -14,7 +14,7 @@ import Foundation
 
 
 
-class WorldTime {
+class WorldTime : Codable {
     let weekNumber, utcOffset, unixtime, timezone: String
     let dstUntil, dstFrom: String
     let dst: Bool

@@ -17,7 +17,7 @@ class WTService{
     
     var database = [WorldTime]()
     
-    func getCurrentTimeFromAPI(url: String){
+    func storeCurrentTimeFromAPI(url: String){
         
         for i in 0...cities.count {
             //A chaque tour de boucle, on fait une GET requête sur l'url + une ville
