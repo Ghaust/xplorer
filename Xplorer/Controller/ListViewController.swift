@@ -11,13 +11,49 @@ import Alamofire
 import AlamofireObjectMapper
 
 class ListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    let worldtimeURL = "http://worldtimeapi.org/api/timezone/Europe/" //on rajoute la ville voulue
+    var cities = ["Amsterdam","Andorra","Astrakhan","Athens","Belgrade","Berlin","Brussels","Bucharest","Budapest","Chisinau","Copenhagen","Dublin","Gibraltar","Helsinki","Istanbul","Kaliningrad","Kiev","Kirov","Lisbon","London","Luxembourg","Madrid","Malta","Minsk","Monaco","Moscow","Oslo","Paris","Prague","Riga","Rome","Samara","Saratov","Simferopol","Sofia","Stockholm","Tallinn","Zurich"]
+    var database = [String:WorldTime]()
+    var test = WorldTime()
     @IBOutlet weak var tableView: UITableView!
-  
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        storeDataInDB()
+       //print(cities.count)
+       //print(database)
+        
+        
+    }
+    
+    func getCity(cityName: String) {
+        
+    }
+    
+    func storeDataInDB(){
+        var i = 0
+        //var unwrapped: WorldTime?
+        for cityName in cities{
+            //database[city] = getCity(cityName: self.cities[i])
+            Alamofire.request(worldtimeURL+cityName).responseObject { (response: DataResponse<WorldTime>) in
+              
+                /*if let responseValue = response.result.value as WorldTime?{
+                    //let object = WorldTime()
+                    self.database[cityName] = responseValue
+                    //print(cityName + " " + (responseValue.unixtime!))
+                    print(cityName + " " + (self.database[cityName]?.unixtime)!)
+            
+                }*/
+                self.database[cityName] = response.result.value
+                self.tableView.reloadData()
+            i+=1
+            }
+            //print(database)
+        }
+        
+     
+        print(database)
         
     }
     

@@ -12,7 +12,6 @@
 		C12531F4220DB3710080A687 /* WPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12531F3220DB3710080A687 /* WPageViewController.swift */; };
 		C12531F6220DB4DC0080A687 /* ListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12531F5220DB4DC0080A687 /* ListViewCell.swift */; };
 		C157D87522089200001FE596 /* ArtistSuggested.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C157D87422089200001FE596 /* ArtistSuggested.storyboard */; };
-		C1B19E4B2242ABAF0048E439 /* WTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B19E4A2242ABAF0048E439 /* WTService.swift */; };
 		C1C746222200727200E66293 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C746212200727200E66293 /* AppDelegate.swift */; };
 		C1C746272200727200E66293 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1C746252200727200E66293 /* Main.storyboard */; };
 		C1C746292200727400E66293 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1C746282200727400E66293 /* Assets.xcassets */; };
@@ -27,7 +26,6 @@
 		C12531F3220DB3710080A687 /* WPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WPageViewController.swift; path = Xplorer/Controller/WPageViewController.swift; sourceTree = SOURCE_ROOT; };
 		C12531F5220DB4DC0080A687 /* ListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewCell.swift; sourceTree = "<group>"; };
 		C157D87422089200001FE596 /* ArtistSuggested.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArtistSuggested.storyboard; sourceTree = "<group>"; };
-		C1B19E4A2242ABAF0048E439 /* WTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WTService.swift; sourceTree = "<group>"; };
 		C1C7461E2200727200E66293 /* Xplorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Xplorer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1C746212200727200E66293 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1C746262200727200E66293 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -124,7 +122,6 @@
 			isa = PBXGroup;
 			children = (
 				C1FB427B223671BA00C3B4F0 /* WorldTime.swift */,
-				C1B19E4A2242ABAF0048E439 /* WTService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -264,7 +261,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C1B19E4B2242ABAF0048E439 /* WTService.swift in Sources */,
 				C1FB427C223671BA00C3B4F0 /* WorldTime.swift in Sources */,
 				C10DFC0022428ADE00BD8421 /* ListViewController.swift in Sources */,
 				C12531F6220DB4DC0080A687 /* ListViewCell.swift in Sources */,

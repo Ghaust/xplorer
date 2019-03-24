@@ -10,6 +10,10 @@ import Foundation
 import Alamofire
 import AlamofireObjectMapper
 
+/*if let variable = responseValue?.dayOfYear {
+ print("La variable déballée vaut \(variable)")
+ }afficher des valeurs optionnels*/
+
 class WTService {
     let worldtimeURL = "http://worldtimeapi.org/api/timezone/Europe/" //on rajoute la ville voulue
     var cities = ["Amsterdam","Andorra","Astrakhan","Athens","Belgrade","Berlin","Brussels","Bucharest","Budapest","Chisinau","Copenhagen","Dublin","Gibraltar","Helsinki","Istanbul","Kaliningrad","Kiev","Kirov","Lisbon","London","Luxembourg","Madrid","Malta","Minsk","Monaco","Moscow","Oslo","Paris","Prague","Riga","Rome","Samara","Saratov","Simferopol","Sofia","Stockholm","Tallinn","Zurich"]
@@ -17,18 +21,15 @@ class WTService {
     
     func storeDataInDB(){
         for i in 0 ..< cities.count {
-        //A chaque tour de boucle, on fait une GET requête sur l'url + une ville et on la stocke dans database
-        Alamofire.request(worldtimeURL+cities[i]).responseObject { (response: DataResponse<WorldTime>) in
-            
-            let responseValue = response.result.value
-            
-            
-            //database.append(<#T##newElement: WorldTime##WorldTime#>)
-            /*if let variable = responseValue?.dayOfYear {
-                print("La variable déballée vaut \(variable)")
-            }afficher des valeurs optionnels*/
-            
-        }
+            //A chaque tour de boucle, on fait une GET requête sur l'url + une ville et on la stocke dans database
+            Alamofire.request(worldtimeURL+cities[i]).responseObject { (response: DataResponse<WorldTime>) in
+                
+                if let responseValue = response.result.value {
+                    self.database.append(responseValue)
+                }
+                
+                
+            }
         }
     }
 }
