@@ -13,8 +13,8 @@ import AlamofireObjectMapper
 class ListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     let worldtimeURL = "http://worldtimeapi.org/api/timezone/Europe/" //on rajoute la ville voulue
     var cities = ["Amsterdam","Andorra","Astrakhan","Athens","Belgrade","Berlin","Brussels","Bucharest","Budapest","Chisinau","Copenhagen","Dublin","Gibraltar","Helsinki","Istanbul","Kaliningrad","Kiev","Kirov","Lisbon","London","Luxembourg","Madrid","Malta","Minsk","Monaco","Moscow","Oslo","Paris","Prague","Riga","Rome","Samara","Saratov","Simferopol","Sofia","Stockholm","Tallinn","Zurich"]
-    var database = [String:WorldTime]()
-    var test = WorldTime()
+    var database: [String: Any] = [String: Any]()
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -36,24 +36,14 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //var unwrapped: WorldTime?
         for cityName in cities{
             //database[city] = getCity(cityName: self.cities[i])
-            Alamofire.request(worldtimeURL+cityName).responseObject { (response: DataResponse<WorldTime>) in
-              
-                /*if let responseValue = response.result.value as WorldTime?{
-                    //let object = WorldTime()
+            Alamofire.request(worldtimeURL+cityName).responseJSON { (response) in
+                if let responseValue = response.result.value as! [String: Any]? {
                     self.database[cityName] = responseValue
-                    //print(cityName + " " + (responseValue.unixtime!))
-                    print(cityName + " " + (self.database[cityName]?.unixtime)!)
-            
-                }*/
-                self.database[cityName] = response.result.value
-                self.tableView.reloadData()
-            i+=1
+                    self.tableView?.reloadData()
+                }
             }
-            //print(database)
+            i+=1
         }
-        
-     
-        print(database)
         
     }
     
@@ -63,6 +53,11 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ListViewCell") as! ListViewCell
+        
+        if self.database.count > 0 {
+            let eachTime = self.database[indexPath.row]
+            cell.
+        }
         return cell
     }
     
