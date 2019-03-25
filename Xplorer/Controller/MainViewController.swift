@@ -20,17 +20,17 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var humidity: UILabel!
     @IBOutlet weak var wind: UILabel!
     @IBOutlet weak var visibility: UILabel!
-    @IBOutlet weak var cityWanted: UISearchBar!
     let locationManager = CLLocationManager()
     
     @IBOutlet weak var greetingsText: UITextField!
     
+    /*
     override func viewWillAppear(_ animated: Bool) {
         DS_Service.weatherForCoord(latitude: "50", longitude: "122"){ (response, error) in
             print("\(response)")
             print("\(error)")
         }
-    }
+    }*/
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,7 +73,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
 
         self.currentTemp.text = data.convertFarhenToCelsius(temp: data.temperature) + "°C"
         self.currentState.text = data.summary.uppercased()
-        self.currentDate.text = data.currentDate
+        self.currentDate.text = data.convertUnixTime(timestamp: data.currentDate) as? String
+        print(data.convertUnixTime(timestamp: data.currentDate))
         self.currentStateIMG = self.change(with: data)
         //self.currentStateIMG.text = data.icon
         self.feelsLikeTemp.text =  data.convertFarhenToCelsius(temp:data.feelsLikeTemp) + "°C"
