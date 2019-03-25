@@ -85,9 +85,9 @@ struct Weather {
     func convertUnixTime(timestamp: String) -> Any {
         let date = Date(timeIntervalSince1970: Double(timestamp)!)
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(abbreviation: "GMT") //Set timezone that you want
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
         dateFormatter.locale = NSLocale.current
-        dateFormatter.dateFormat = "yyyy-MM-dd" //Specify your format that you want
+        dateFormatter.dateFormat = "MMMM dd, yyyy"
         let strDate = dateFormatter.string(from: date)
         return strDate
         

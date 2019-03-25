@@ -75,12 +75,12 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         self.currentState.text = data.summary.uppercased()
         self.currentDate.text = data.convertUnixTime(timestamp: data.currentDate) as? String
         print(data.convertUnixTime(timestamp: data.currentDate))
-        self.currentStateIMG = self.change(with: data)
-        //self.currentStateIMG.text = data.icon
+        self.currentStateIMG.image = UIImage(named: self.changeImageAccordingToCurrentWeather(with: data))
         self.feelsLikeTemp.text =  data.convertFarhenToCelsius(temp:data.feelsLikeTemp) + "°C"
         self.humidity.text = data.humidity + "%"
         self.wind.text = data.windSpeed + " Km/h"
         self.visibility.text = data.visibility + " Km"
+        self.greetingsText.text = changeGreetings()
     }
 
     func handleError(message: String) {
@@ -89,7 +89,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func change(with data: Weather) -> UIImageView {
+    //c
+    func changeImageAccordingToCurrentWeather(with data: Weather) -> String {
         let rainy = "rainy"
         let smallCloudsInNight = "blue_cloudy"
         let smallCloudsInDay = "yellow_cloudy"
@@ -100,46 +101,56 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         let sunIsLife = "yellow_sun"
         let moonIsLifeToo = "blue_sun"
         let iLoveClouds = "partiallycloudyyellow"
-        let image: UIImage
-        let imageView: UIImageView
+        let image: String
         
         switch data.icon {
         case "cloudy":
-            image = UIImage(named: iLoveClouds)!
-            imageView = UIImageView(image: image)
+            image = iLoveClouds
         case "rain":
-            image = UIImage(named: rainy)!
-            imageView = UIImageView(image: image)
+            image = rainy
         case "partly-cloudy-day":
-            image = UIImage(named: smallCloudsInDay)!
-            imageView = UIImageView(image: image)
+            image =  smallCloudsInDay
         case "partly-cloudy-night":
-            image = UIImage(named: smallCloudsInNight)!
-            imageView = UIImageView(image: image)
+            image =  smallCloudsInNight
         case "clear-day":
-            image = UIImage(named: sunIsLife)!
-            imageView = UIImageView(image: image)
+            image =  sunIsLife
         case "clear-night":
-            image = UIImage(named: moonIsLifeToo)!
-            imageView = UIImageView(image: image)
+            image =  moonIsLifeToo
         case "snow":
-            image = UIImage(named: snowstorm)!
-            imageView = UIImageView(image: image)
+            image =  snowstorm
         case "sleet":
-            image = UIImage(named: snowStormWithClouds)!
-            imageView = UIImageView(image: image)
+            image =  snowStormWithClouds
         case "wind":
-            image = UIImage(named: stormcoming)!
-            imageView = UIImageView(image: image)
+            image =  stormcoming
         case "fog":
-            image = UIImage(named: plentyOfCloudsInDay)!
-            imageView = UIImageView(image: image)
+            image =  plentyOfCloudsInDay
         default:
-            image = UIImage(named: iLoveClouds)!
-            imageView = UIImageView(image: image)
+            image =  iLoveClouds
         }
         
-        return imageView
+        return image
+    }
+    
+    func changeGreetings() -> String {
+        let date = NSDate()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH"
+        let currentHour = Int(dateFormatter.string(from: date as Date))!
+        
+        if(currentHour  < 08){
+            return "Good morning !"        }
+        else if(currentHour  < 15){
+            return "Good afternoon !"
+        }
+        else if(currentHour < 17){
+            return "Good evening !"
+        }
+        else if(currentHour < 21){
+            return "It's time to sleep..."
+        }
+        else{
+            return "Have a bunch of nightmares !"
+        }
     }
 
 
