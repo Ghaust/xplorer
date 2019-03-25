@@ -23,6 +23,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var cityWanted: UISearchBar!
     let locationManager = CLLocationManager()
     
+    @IBOutlet weak var greetingsText: UITextField!
+    
     override func viewWillAppear(_ animated: Bool) {
         DS_Service.weatherForCoord(latitude: "50", longitude: "122"){ (response, error) in
             print("\(response)")
@@ -72,10 +74,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         self.currentTemp.text = data.convertFarhenToCelsius(temp: data.temperature) + "°C"
         self.currentState.text = data.summary.uppercased()
         self.currentDate.text = data.currentDate
+        self.currentStateIMG = self.change(with: data)
         //self.currentStateIMG.text = data.icon
         self.feelsLikeTemp.text =  data.convertFarhenToCelsius(temp:data.feelsLikeTemp) + "°C"
         self.humidity.text = data.humidity + "%"
-        self.wind.text = data.windSpeed + " Km"
+        self.wind.text = data.windSpeed + " Km/h"
         self.visibility.text = data.visibility + " Km"
     }
 
@@ -83,6 +86,59 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         let alert = UIAlertController(title: "Forecast Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func change(with data: Weather) -> UIImageView {
+        let rainy = "rainy"
+        let smallCloudsInNight = "blue_cloudy"
+        let smallCloudsInDay = "yellow_cloudy"
+        let snowStormWithClouds = "snow"
+        let stormcoming = "stormcoming"
+        let snowstorm = "sunnyandverysnowy"
+        let plentyOfCloudsInDay = "verycloudyyellow"
+        let sunIsLife = "yellow_sun"
+        let moonIsLifeToo = "blue_sun"
+        let iLoveClouds = "partiallycloudyyellow"
+        let image: UIImage
+        let imageView: UIImageView
+        
+        switch data.icon {
+        case "cloudy":
+            image = UIImage(named: iLoveClouds)!
+            imageView = UIImageView(image: image)
+        case "rain":
+            image = UIImage(named: rainy)!
+            imageView = UIImageView(image: image)
+        case "partly-cloudy-day":
+            image = UIImage(named: smallCloudsInDay)!
+            imageView = UIImageView(image: image)
+        case "partly-cloudy-night":
+            image = UIImage(named: smallCloudsInNight)!
+            imageView = UIImageView(image: image)
+        case "clear-day":
+            image = UIImage(named: sunIsLife)!
+            imageView = UIImageView(image: image)
+        case "clear-night":
+            image = UIImage(named: moonIsLifeToo)!
+            imageView = UIImageView(image: image)
+        case "snow":
+            image = UIImage(named: snowstorm)!
+            imageView = UIImageView(image: image)
+        case "sleet":
+            image = UIImage(named: snowStormWithClouds)!
+            imageView = UIImageView(image: image)
+        case "wind":
+            image = UIImage(named: stormcoming)!
+            imageView = UIImageView(image: image)
+        case "fog":
+            image = UIImage(named: plentyOfCloudsInDay)!
+            imageView = UIImageView(image: image)
+        default:
+            image = UIImage(named: iLoveClouds)!
+            imageView = UIImageView(image: image)
+        }
+        
+        return imageView
     }
 
 
