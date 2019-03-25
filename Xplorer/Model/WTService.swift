@@ -1,44 +1,35 @@
 //
-//  ForecastTopArtistService.swift
+//  WTService.swift
 //  Xplorer
 //
-//  Created by Joseph-Emmanuel Banzio on 12/03/2019.
+//  Created by Joseph-Emmanuel Banzio on 20/03/2019.
 //  Copyright © 2019 Joseph-Emmanuel Banzio. All rights reserved.
 //
 
 import Foundation
 import Alamofire
+import AlamofireObjectMapper
 
-class WTService{
-    
-    let worldtimeURL = URL(string:"http://worldtimeapi.org/api/timezone/") //on rajoute la ville voulue
-    
+/*if let variable = responseValue?.dayOfYear {
+ print("La variable déballée vaut \(variable)")
+ }afficher des valeurs optionnels*/
+
+class WTService {
+    let worldtimeURL = "http://worldtimeapi.org/api/timezone/Europe/" //on rajoute la ville voulue
     var cities = ["Amsterdam","Andorra","Astrakhan","Athens","Belgrade","Berlin","Brussels","Bucharest","Budapest","Chisinau","Copenhagen","Dublin","Gibraltar","Helsinki","Istanbul","Kaliningrad","Kiev","Kirov","Lisbon","London","Luxembourg","Madrid","Malta","Minsk","Monaco","Moscow","Oslo","Paris","Prague","Riga","Rome","Samara","Saratov","Simferopol","Sofia","Stockholm","Tallinn","Zurich"]
-    
     var database = [WorldTime]()
     
-    func getCurrentTimeFromAPI(url: String){
-        
-        for i in 0...cities.count {
-            //A chaque tour de boucle, on fait une GET requête sur l'url + une ville
-            AF.request(url+cities[i]).responseJSON { response in
-                print("Request: \(String(describing: response.request))")
-                print("Response: \(String(describing: response.response))")
-                print("Result: \(response.result)")
+    func storeDataInDB(){
+        for i in 0 ..< cities.count {
+            //A chaque tour de boucle, on fait une GET requête sur l'url + une ville et on la stocke dans database
+            Alamofire.request(worldtimeURL+cities[i]).responseObject { (response: DataResponse<WorldTime>) in
                 
-                if let json = response.result.value {
-                    print("JSON: \(json)")
-                    
+                if let responseValue = response.result.value {
+                    self.database.append(responseValue)
                 }
                 
-                if let data = response.data, let utf8Text = String(data: data, encoding: .utf8){
-                    print("Data: \(utf8Text)")
-                }
+                
             }
         }
-        
-        
     }
-
-    
 }
