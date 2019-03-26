@@ -138,15 +138,17 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         let currentHour = Int(dateFormatter.string(from: date as Date))!
         
         if(currentHour  < 08){
-            return "Good morning !"        }
+            return "Hello Sunshine !"
+            
+        }
         else if(currentHour  < 15){
+            return "Good morning !"
+        }
+        else if(currentHour > 17){
             return "Good afternoon !"
         }
-        else if(currentHour < 17){
-            return "Good evening !"
-        }
         else if(currentHour < 21){
-            return "It's time to sleep..."
+            return "Good evening !"
         }
         else{
             return "Have a bunch of nightmares !"
