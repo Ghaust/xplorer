@@ -24,6 +24,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var greetingsText: UITextField!
     
+    @IBOutlet weak var currentDay: UITextField!
     /*
     override func viewWillAppear(_ animated: Bool) {
         DS_Service.weatherForCoord(latitude: "50", longitude: "122"){ (response, error) in
@@ -58,6 +59,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                     self.handleError(message: "Something is wrong with your location.")
                 }
             }
+            
+            /*convertCityNameToLatLong(addressString: "Abidjan"){ (coord, error) in
+                print(coord)
+            }*/
         }
     }
     
@@ -81,6 +86,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         self.wind.text = data.windSpeed + " Km/h"
         self.visibility.text = data.visibility + " Km"
         self.greetingsText.text = changeGreetings()
+        self.currentDay.text = getCurrentDay()
     }
 
     func handleError(message: String) {
@@ -137,23 +143,31 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         dateFormatter.dateFormat = "HH"
         let currentHour = Int(dateFormatter.string(from: date as Date))!
         
-        if(currentHour  < 08){
-            return "Hello Sunshine !"
+        if(currentHour < 12){
+            return "MORNING"
             
         }
-        else if(currentHour  < 15){
-            return "Good morning !"
-        }
-        else if(currentHour > 17){
-            return "Good afternoon !"
+        if(currentHour < 17){
+            return "AFTERNOON"
         }
         else if(currentHour < 21){
-            return "Good evening !"
+            return "EVENING"
         }
         else{
-            return "Have a bunch of nightmares !"
+            return "NIGHT"
         }
     }
 
-
+    func getCurrentDay() -> String {
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd"
+        
+        dateFormatter.dateFormat = "EEEE"
+        let currentDateString: String = dateFormatter.string(from: date)
+       
+        return currentDateString.uppercased()
+    }
+    
+   
 }
