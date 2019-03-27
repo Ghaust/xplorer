@@ -39,16 +39,20 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
         //on récupère la location de l'utilisateur
         locationManager.requestLocation()
-        // Do any additional setup after loading the view.
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         if let location = locations.first {
+            
             let longitude = String(location.coordinate.longitude)
             let latitude = String(location.coordinate.latitude)
             
-            DS_Service.weatherForCoord(latitude: latitude, longitude: longitude) { (weather, error) in
+            //sauvegarde des données en cache
+            Defaults.saveLongAndLat(longitude, latitude)
+            let dataSaved = Defaults.getLatAndLong
+            
+            DS_Service.weatherForCoord(latitude: dataSaved.latitude!, longitude: dataSaved.longitude!) { (weather, error) in
                 
                 if let weatherData = weather {
                     self.updateInfos(with: weatherData, at: location)
@@ -63,6 +67,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             /*convertCityNameToLatLong(addressString: "Abidjan"){ (coord, error) in
                 print(coord)
             }*/
+            //On supprime les données en cache
+            Defaults.clearUserData()
         }
     }
     
