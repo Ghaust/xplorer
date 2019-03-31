@@ -9,6 +9,8 @@
 import UIKit
 import CoreLocation
 
+let defaults = UserDefaults.standard
+
 class MainViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet weak var currentCity: UILabel!
@@ -25,50 +27,42 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var greetingsText: UITextField!
     
     @IBOutlet weak var currentDay: UITextField!
-    /*
-    override func viewWillAppear(_ animated: Bool) {
-        DS_Service.weatherForCoord(latitude: "50", longitude: "122"){ (response, error) in
-            print("\(response)")
-            print("\(error)")
-        }
-    }*/
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         //on récupère la location de l'utilisateur
         locationManager.requestLocation()
+
+       
+        
     }
     
+   
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         if let location = locations.first {
             
-            let longitude = String(location.coordinate.longitude)
-            let latitude = String(location.coordinate.latitude)
-            
             //sauvegarde des données en cache
-            Defaults.saveLongAndLat(longitude, latitude)
-            let dataSaved = Defaults.getLatAndLong
+            UserDefaults.standard.set(String(location.coordinate.latitude), forKey: "LAT")
+            UserDefaults.standard.set(String(location.coordinate.longitude), forKey: "LON")
+
+            UserDefaults().synchronize()
             
-            DS_Service.weatherForCoord(latitude: dataSaved.latitude!, longitude: dataSaved.longitude!) { (weather, error) in
+            let latitude = UserDefaults.standard.value(forKey: "LAT")
+            let longitude = UserDefaults.standard.value(forKey: "LON")
+            
+            DS_Service.weatherForCoord(latitude: latitude as! String, longitude: longitude as! String) { (weather, error) in
                 
                 if let weatherData = weather {
-                    self.updateInfos(with: weatherData, at: location)
-                    
+                    self.updateInfos(with: weatherData, at: location)  
                 }
                 
                 else if let _ = error {
                     self.handleError(message: "Something is wrong with your location.")
                 }
             }
-            
-            /*convertCityNameToLatLong(addressString: "Abidjan"){ (coord, error) in
-                print(coord)
-            }*/
-            //On supprime les données en cache
-            Defaults.clearUserData()
         }
     }
     
@@ -85,7 +79,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         self.currentTemp.text = data.convertFarhenToCelsius(temp: data.temperature) + "°C"
         self.currentState.text = data.summary.uppercased()
         self.currentDate.text = data.convertUnixTime(timestamp: data.currentDate) as? String
-        print(data.convertUnixTime(timestamp: data.currentDate))
+        //print(data.convertUnixTime(timestamp: data.currentDate))
         self.currentStateIMG.image = UIImage(named: self.changeImageAccordingToCurrentWeather(with: data))
         self.feelsLikeTemp.text =  data.convertFarhenToCelsius(temp:data.feelsLikeTemp) + "°C"
         self.humidity.text = data.humidity + "%"
@@ -101,7 +95,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-    //c
+    
     func changeImageAccordingToCurrentWeather(with data: Weather) -> String {
         let rainy = "rainy"
         let smallCloudsInNight = "blue_cloudy"

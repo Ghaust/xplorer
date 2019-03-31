@@ -10,12 +10,13 @@ import UIKit
 
 class WeatherCell: UITableViewCell {
     
-    @IBOutlet weak var currentTime: UILabel!
+    @IBOutlet weak var time: UILabel!
     
     @IBOutlet weak var location: UILabel!
     
-    @IBOutlet weak var temperature: UILabel!
+    @IBOutlet weak var temp: UILabel!
     
+  
     
 }
 
