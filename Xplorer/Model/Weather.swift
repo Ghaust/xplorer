@@ -73,14 +73,6 @@ struct Weather {
        
     }
     
-    func convertFarhenToCelsius(temp: String) -> String {
-        if temp.isEmpty {
-            return "-"
-        }else{
-            return String(Int(5.0/9.0 * ((Double(temp)!) - 32.0)))
-           
-        }
-    }
     
     func convertUnixTime(timestamp: String) -> Any {
         let date = Date(timeIntervalSince1970: Double(timestamp)!)
@@ -90,6 +82,16 @@ struct Weather {
         dateFormatter.dateFormat = "MMMM dd, yyyy"
         let strDate = dateFormatter.string(from: date)
         return strDate
+        
+    }
+
+}
+
+func convertFarhenToCelsius(temp: String) -> String {
+    if temp.isEmpty {
+        return "-"
+    }else{
+        return String(Int(5.0/9.0 * ((Double(temp)!) - 32.0)))
         
     }
 }

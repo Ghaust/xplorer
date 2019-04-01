@@ -34,8 +34,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
         //on récupère la location de l'utilisateur
         locationManager.requestLocation()
-
-       
         
     }
     
@@ -76,12 +74,12 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             self.currentCity.text = locationName
         }
 
-        self.currentTemp.text = data.convertFarhenToCelsius(temp: data.temperature) + "°C"
+        self.currentTemp.text = convertFarhenToCelsius(temp: data.temperature) + "°C"
         self.currentState.text = data.summary.uppercased()
         self.currentDate.text = data.convertUnixTime(timestamp: data.currentDate) as? String
         //print(data.convertUnixTime(timestamp: data.currentDate))
-        self.currentStateIMG.image = UIImage(named: self.changeImageAccordingToCurrentWeather(with: data))
-        self.feelsLikeTemp.text =  data.convertFarhenToCelsius(temp:data.feelsLikeTemp) + "°C"
+        self.currentStateIMG.image = UIImage(named: changeImageAccordingToCurrentWeather(with: data.icon))
+        self.feelsLikeTemp.text = convertFarhenToCelsius(temp: data.feelsLikeTemp) + "°C"
         self.humidity.text = data.humidity + "%"
         self.wind.text = data.windSpeed + " Km/h"
         self.visibility.text = data.visibility + " Km"
@@ -96,46 +94,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     
-    func changeImageAccordingToCurrentWeather(with data: Weather) -> String {
-        let rainy = "rainy"
-        let smallCloudsInNight = "blue_cloudy"
-        let smallCloudsInDay = "yellow_cloudy"
-        let snowStormWithClouds = "snow"
-        let stormcoming = "stormcoming"
-        let snowstorm = "sunnyandverysnowy"
-        let plentyOfCloudsInDay = "verycloudyyellow"
-        let sunIsLife = "yellow_sun"
-        let moonIsLifeToo = "blue_sun"
-        let iLoveClouds = "partiallycloudyyellow"
-        let image: String
-        
-        switch data.icon {
-        case "cloudy":
-            image = iLoveClouds
-        case "rain":
-            image = rainy
-        case "partly-cloudy-day":
-            image =  smallCloudsInDay
-        case "partly-cloudy-night":
-            image =  smallCloudsInNight
-        case "clear-day":
-            image =  sunIsLife
-        case "clear-night":
-            image =  moonIsLifeToo
-        case "snow":
-            image =  snowstorm
-        case "sleet":
-            image =  snowStormWithClouds
-        case "wind":
-            image =  stormcoming
-        case "fog":
-            image =  plentyOfCloudsInDay
-        default:
-            image =  iLoveClouds
-        }
-        
-        return image
-    }
+   
     
     func changeGreetings() -> String {
         let date = NSDate()
@@ -170,4 +129,45 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     }
     
    
+}
+
+func changeImageAccordingToCurrentWeather(with data: String) -> String {
+    let rainy = "rainy"
+    let smallCloudsInNight = "blue_cloudy"
+    let smallCloudsInDay = "yellow_cloudy"
+    let snowStormWithClouds = "snow"
+    let stormcoming = "stormcoming"
+    let snowstorm = "sunnyandverysnowy"
+    let plentyOfCloudsInDay = "verycloudyyellow"
+    let sunIsLife = "yellow_sun"
+    let moonIsLifeToo = "blue_sun"
+    let iLoveClouds = "partiallycloudyyellow"
+    let image: String
+    
+    switch data {
+    case "cloudy":
+        image = iLoveClouds
+    case "rain":
+        image = rainy
+    case "partly-cloudy-day":
+        image =  smallCloudsInDay
+    case "partly-cloudy-night":
+        image =  smallCloudsInNight
+    case "clear-day":
+        image =  sunIsLife
+    case "clear-night":
+        image =  moonIsLifeToo
+    case "snow":
+        image =  snowstorm
+    case "sleet":
+        image =  snowStormWithClouds
+    case "wind":
+        image =  stormcoming
+    case "fog":
+        image =  plentyOfCloudsInDay
+    default:
+        image =  iLoveClouds
+    }
+    
+    return image
 }

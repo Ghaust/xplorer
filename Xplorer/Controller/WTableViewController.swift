@@ -9,71 +9,81 @@
 import UIKit
 import CoreLocation
 
-class WTableViewController: UITableViewController {
+class WTableViewController: UITableViewController, UISearchBarDelegate {
     
-    var weathers = [Any]()
-    var cities = ["Abidjan", "Paris", "New York", "Mexico", "Johannesburg", "Nice", "Lille", "Bruxelles", "Las Vegas", "Malaga", "Barcelone"]
+    @IBOutlet weak var searchBar: UISearchBar!
     
+    var weathers = [WeatherData]()
+ 
     override func viewDidLoad() {
-        addYourPosToCitiesArray()
-        let latitude = UserDefaults.standard.value(forKey: "LAT") as! String
-        let longitude = UserDefaults.standard.value(forKey: "LON") as! String
+        super.viewDidLoad()
         
-            DS_Service.weatherForCoord(latitude: latitude, longitude: longitude ) { (weather, error) in
-                if let weatherData = weather {
-                    let data = weatherData
-                        self.weathers.append(data)
-                        //print(self.weathers)
-                        self.tableView?.reloadData()
-                    }
-                        
-                    else if let _ = error {
-                        print("Error with array initialization")
-                    }
-                }
-       
-        print(cities)
-       
+        searchBar.delegate = self
+        
+        //ville par défaut
+        updateInfos(cityName: "Paris")
     }
         
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        if let cityName = searchBar.text, !cityName.isEmpty {
+            updateInfos(cityName: cityName)
+        }
+        
+    }
+    
+    func updateInfos(cityName: String){
+        //on utilise CLGeocoder pour obtenir des coordonnées géographiques à partir d'une adresse
+        CLGeocoder().geocodeAddressString(cityName){ (placemarks:[CLPlacemark]?, error:Error?) in
+            
+            if error == nil {
+                if let location = placemarks?.first?.location{
+                    WeatherData.forecast(withLocation: location.coordinate, completion: { (res:[WeatherData]?) in
+                        
+                        if let wData = res {
+                            self.weathers = wData
+                            
+                            //permet de sauvegarder les données dans une fonction asynchrone
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                            }
+                            
+                        }
+                    })
+                }
+                
+            }
+            
+        }
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return weathers.count
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return 1
     }
     
   
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let currentDate = Calendar.current.date(byAdding: .day, value: section, to: Date())
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM dd, yyyy"
+        
+        return dateFormatter.string(from: currentDate!)
+    }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "wCell", for: indexPath) as! WeatherCell
-        //let cityName = cities[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "wCell", for: indexPath)
+       let weatherData = weathers[indexPath.section]
         
-        if(weathers.count > 0){
-           //let eachWeather = self.weathers[indexPath.row]
-           cell.time.text = getCurrentHour()
-        }
-        cell.textLabel?.text = "toto"
-        //cell.time.text = "00h58"
-        
+        cell.textLabel?.text = weatherData.summary
+        let temp = convertFarhenToCelsius(temp: String(weatherData.temperature))
+        cell.detailTextLabel?.text = "\(temp) °C"
+        cell.imageView?.image = UIImage(named: changeImageAccordingToCurrentWeather(with: weatherData.icon))
         return cell
     }
     
-    /*
-    func initArray(){
-     convertCityNameToLatLong(address: cityName) { (coord, error) in
-     DS_Service.weatherForCoord(latitude: String(coord.latitude), longitude: String(coord.longitude)) { (weather, error) in
-     
-     if let weatherData = weather {
-     self.weathers.append(weatherData)
-     //print(self.weathers)
-     self.tableView?.reloadData()
-     }
-     
-     else if let _ = error {
-     print("Error with array initialization")
-     }
-     }
-     }
-        }
-    }*/
     
     func getCurrentHour() -> String {
         let date = Date()
@@ -86,32 +96,5 @@ class WTableViewController: UITableViewController {
         return currentDateString.uppercased()
     }
     
-    /*
-    func addYourPosToCitiesArray(){
-        let latitude = UserDefaults.standard.value(forKey: "LAT_COOR")
-        let longitude = UserDefaults.standard.value(forKey: "LON_COOR")
-        
-        CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
-            let locationName = placemarks?.first?.locality ?? "Unknown Location"
-            self.cities.insert(locationName, at: 0)
-        }
-    }*/
-    
-    func convertCityNameToLatLong(address: String,
-                                  completionHandler: @escaping(CLLocationCoordinate2D, NSError?) -> Void ) {
-        let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(address) { (placemarks, error) in
-            if error == nil {
-                if let placemark = placemarks?[0] {
-                    let location = placemark.location!
-                    
-                    completionHandler(location.coordinate, nil)
-                    return
-                }
-            }
-            
-            completionHandler(kCLLocationCoordinate2DInvalid, error as NSError?)
-        }
-    }
 
 }

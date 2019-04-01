@@ -174,7 +174,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="ssp-EV-tKX" kind="show" id="xHZ-vZ-pCc"/>
+                                    <segue destination="hfy-0a-m5c" kind="show" id="bqe-ls-W9q"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -201,56 +201,57 @@
             <point key="canvasLocation" x="-430" y="-875"/>
         </scene>
         <!--Table View Controller-->
-        <scene sceneID="tve-DI-7ea">
+        <scene sceneID="2xc-0a-Lk5">
             <objects>
-                <tableViewController id="ssp-EV-tKX" customClass="WTableViewController" customModule="Xplorer" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="xR8-9a-G5z">
+                <tableViewController id="hfy-0a-m5c" customClass="WTableViewController" customModule="Xplorer" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="4We-il-ir7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="3JB-lR-yjr">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="47"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x3Q-fP-ZdN">
-                                    <rect key="frame" x="363" y="3" width="47" height="37"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="55"/>
-                                    <state key="normal" title="+">
-                                        <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </state>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </view>
+                        <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" text="Name a city..." placeholder="Paris" id="V7N-2s-IEx">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="wCell" rowHeight="111" id="avD-b6-g65" customClass="WeatherCell" customModule="Xplorer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="75" width="414" height="111"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="wCell" textLabel="Ray-jG-fhZ" detailTextLabel="B7a-m2-Qts" rowHeight="172" style="IBUITableViewCellStyleSubtitle" id="qG3-ro-AvR">
+                                <rect key="frame" x="0.0" y="84" width="414" height="172"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="avD-b6-g65" id="jSS-rc-uxm">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="110.5"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qG3-ro-AvR" id="Qcb-lc-8Xj">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="171.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="blue_cloudy" translatesAutoresizingMaskIntoConstraints="NO" id="zDp-Lq-9dT">
-                                            <rect key="frame" x="0.0" y="5" width="147" height="100"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ray-jG-fhZ">
+                                            <rect key="frame" x="20" y="66" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B7a-m2-Qts">
+                                            <rect key="frame" x="20" y="89.5" width="44" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="ssp-EV-tKX" id="7lb-Hl-sHZ"/>
-                            <outlet property="delegate" destination="ssp-EV-tKX" id="ymT-Fn-aPo"/>
+                            <outlet property="dataSource" destination="hfy-0a-m5c" id="Ooj-Tu-ibU"/>
+                            <outlet property="delegate" destination="hfy-0a-m5c" id="IBy-4W-JIf"/>
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="tableView" destination="xR8-9a-G5z" id="IvB-GG-fex"/>
+                        <outlet property="searchBar" destination="V7N-2s-IEx" id="BxP-c0-Uti"/>
                     </connections>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="U0K-Xk-NVk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h8R-It-nql" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="523.1884057971015" y="-875.22321428571422"/>
+            <point key="canvasLocation" x="508.69565217391306" y="-871.20535714285711"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Lvl-k4-Ktc">
@@ -270,7 +271,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="blue_cloudy" width="166.5" height="166.5"/>
         <image name="yellow_cloudy" width="166.5" height="166.5"/>
     </resources>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
