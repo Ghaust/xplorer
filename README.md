@@ -31,7 +31,7 @@ I used the dark sky API in order to fetch weather's info.
 
 ### Launch Screen
 
-<img src="img/cygne-rouge" alt="red-cygn">
+<img src="img/cygne-rouge.jpg" alt="red-cygn">
 
 <i> Picture of a red cygn </i>
 
