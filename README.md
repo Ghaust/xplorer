@@ -19,6 +19,7 @@ I used the dark sky API in order to fetch weather's info.
 - Two screens : one with the detail of your current location, one with a list
 - Display of a list with UITableView
 - Gitflow
+- CocoadPods
 - CoreLocation for the User's location + use of the different methods in order to do geocoding or reverse geocoding
 - Multiple use of Completion Handlers in order to work with asynchronous functions
 - Storage of the User's location in cache with UserDefaults
@@ -30,17 +31,17 @@ I used the dark sky API in order to fetch weather's info.
 
 ### Launch Screen
 
-<img src="img/cygne-red" alt="red-cygn">
+<img src="img/cygne-rouge alt="red-cygn">
 
 <i> Picture of a red cygn </i>
 
 ### Weather of your current location
 
-<img src="img/screen-paris.PNG" alt="paris">   <img src="img/screen-levallois.PNG" alt="levallois">
+<img src="img/screen_paris.PNG" alt="paris">   <img src="img/screen_levallois.PNG" alt="levallois">
 
 ### Weather of the week of your current location or the location you want
 
-<img src="img_readme/detail_pokemon.png" alt="détail pokemon"> <img src="img_readme/detail_pokemon_2.png" alt="détail pokemon"> 
+<img src="img/IMG_5479.PNG" alt="tokyo"> <img src="img/IMG_5480.PNG" alt="beijing"> <img src="img/IMG_5481.PNG" alt="dubai"> 
 
 <i> Bla bla bla </i>
 
