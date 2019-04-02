@@ -13,7 +13,7 @@ I used the dark sky API in order to fetch weather's info.
 
 ## Technical Sheet
 
-- MVC 
+- MVC architecture 
 - Alamofire in order to make HTTP requests
 - URLSession also for HTTP requests (easier to manage than Alamofire for complex requests) + JSONSerialization
 - Two screens : one with the detail of your current location, one with a list
@@ -39,16 +39,28 @@ I used the dark sky API in order to fetch weather's info.
 
 <img src="img/screen_neuilly.jpeg" alt="paris" width="247" height="512">      <img src="img/screen_levallois.PNG" alt="levallois" width="247" height="512">
 
+On this screen, you can see :
+- Your current location (name of the city)
+- The current date
+- A button ">>" that will redirect you to the second screen
+- An image that changes according to the current state (partly-cloudy etc...)
+- The current weather and some details : the apparent temperature, humidity, wind and visibility...
+- The current day and also the current moment of the day
+
 ### Weather of the week of your current location or the location you want
 
 <img src="img/IMG_5479.PNG" alt="tokyo" width="247" height="512">      <img src="img/IMG_5480.PNG" alt="beijing" width="247" height="512">      <img src="img/IMG_5481.PNG" alt="dubai" width="247" height="512"> 
 
-<i> Bla bla bla </i>
-
+On this screen, you can see :
+- A search bar that can be used to name a place (city, country, address...)
+- A list of the weather of the week 
+- Title of the cell which is the date of the day
+- Different images linked to the state of the day
 
 ### Demonstration
 
 <img src="img/demo.gif" alt="demo">
+
 
 
 <i> First page of the app inspired by <a href="https://etapes.com/gabriel-nazoa-weather-app/#&gid=1&pid=1">Gabriel Nazoa</a> </i> <br/>
