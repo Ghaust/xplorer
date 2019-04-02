@@ -49,8 +49,7 @@ On this screen, you can see :
 
 ### Weather of the week of your current location or the location you want
 
-<pre>
-<img src="img/IMG_5479.PNG" alt="tokyo" width="247" height="512">     <img src="img/IMG_5480.PNG" alt="beijing" width="247" height="512">     <img src="img/IMG_5481.PNG" alt="dubai" width="247" height="512"> </pre>
+<img src="img/IMG_5479.PNG" alt="tokyo" width="247" height="512">     <img src="img/IMG_5480.PNG" alt="beijing" width="247" height="512">     <img src="img/IMG_5481.PNG" alt="dubai" width="247" height="512">
 
 On this screen, you can see :
 - A search bar that can be used to name a place (city, country, address...)
