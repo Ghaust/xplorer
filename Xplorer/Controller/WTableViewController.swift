@@ -20,10 +20,21 @@ class WTableViewController: UITableViewController, UISearchBarDelegate {
         
         searchBar.delegate = self
         
+        let latitude = UserDefaults.standard.value(forKey: "LAT_NS")
+        let longitude = UserDefaults.standard.value(forKey: "LON_NS")
         //ville par défaut
-        updateInfos(cityName: "Paris")
-    }
+        CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: latitude as! CLLocationDegrees, longitude: longitude as! CLLocationDegrees )) { (placemarks:[CLPlacemark]?, error:Error?) in
+            
+            if let city = placemarks?.first?.locality {
+                self.updateInfos(cityName: city)
+            }
+            
+        }
         
+    }
+    
+    
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         if let cityName = searchBar.text, !cityName.isEmpty {

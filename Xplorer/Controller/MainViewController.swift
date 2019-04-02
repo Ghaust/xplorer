@@ -45,7 +45,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             //sauvegarde des données en cache
             UserDefaults.standard.set(String(location.coordinate.latitude), forKey: "LAT")
             UserDefaults.standard.set(String(location.coordinate.longitude), forKey: "LON")
-
+            UserDefaults.standard.set(location.coordinate.latitude, forKey: "LAT_NS")
+            UserDefaults.standard.set(location.coordinate.longitude, forKey: "LON_NS")
+            
             UserDefaults().synchronize()
             
             let latitude = UserDefaults.standard.value(forKey: "LAT")
