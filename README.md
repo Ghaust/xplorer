@@ -20,6 +20,7 @@ I used the dark sky API in order to fetch weather's info.
 - Display of a list with UITableView
 - Gitflow
 - CocoadPods
+- Show Segue Animation between the two screens
 - CoreLocation for the User's location + use of the different methods in order to do geocoding or reverse geocoding
 - Multiple use of Completion Handlers in order to work with asynchronous functions
 - Storage of the User's location in cache with UserDefaults
