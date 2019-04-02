@@ -31,17 +31,17 @@ I used the dark sky API in order to fetch weather's info.
 
 ### Launch Screen
 
-<img src="img/cygne-rouge alt="red-cygn">
+<img src="img/cygne-rouge" alt="red-cygn">
 
 <i> Picture of a red cygn </i>
 
 ### Weather of your current location
 
-<img src="img/screen_paris.PNG" alt="paris">   <img src="img/screen_levallois.PNG" alt="levallois">
+<img src="img/screen_paris.PNG" alt="paris" width="247" height="512">   <img src="img/screen_levallois.PNG" alt="levallois" width="247" height="512">
 
 ### Weather of the week of your current location or the location you want
 
-<img src="img/IMG_5479.PNG" alt="tokyo"> <img src="img/IMG_5480.PNG" alt="beijing"> <img src="img/IMG_5481.PNG" alt="dubai"> 
+<img src="img/IMG_5479.PNG" alt="tokyo" width="247" height="512"> <img src="img/IMG_5480.PNG" alt="beijing" width="247" height="512"> <img src="img/IMG_5481.PNG" alt="dubai" width="247" height="512"> 
 
 <i> Bla bla bla </i>
 
