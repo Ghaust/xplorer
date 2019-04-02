@@ -9,6 +9,8 @@
 import UIKit
 import CoreLocation
 
+let defaults = UserDefaults.standard
+
 class MainViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet weak var currentCity: UILabel!
@@ -20,38 +22,41 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var humidity: UILabel!
     @IBOutlet weak var wind: UILabel!
     @IBOutlet weak var visibility: UILabel!
-    @IBOutlet weak var cityWanted: UISearchBar!
     let locationManager = CLLocationManager()
     
     @IBOutlet weak var greetingsText: UITextField!
     
-    override func viewWillAppear(_ animated: Bool) {
-        DS_Service.weatherForCoord(latitude: "50", longitude: "122"){ (response, error) in
-            print("\(response)")
-            print("\(error)")
-        }
-    }
-    
+    @IBOutlet weak var currentDay: UITextField!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         //on récupère la location de l'utilisateur
         locationManager.requestLocation()
-        // Do any additional setup after loading the view.
+        
     }
     
+   
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         if let location = locations.first {
-            let longitude = String(location.coordinate.longitude)
-            let latitude = String(location.coordinate.latitude)
             
-            DS_Service.weatherForCoord(latitude: latitude, longitude: longitude) { (weather, error) in
+            //sauvegarde des données en cache
+            UserDefaults.standard.set(String(location.coordinate.latitude), forKey: "LAT")
+            UserDefaults.standard.set(String(location.coordinate.longitude), forKey: "LON")
+            UserDefaults.standard.set(location.coordinate.latitude, forKey: "LAT_NS")
+            UserDefaults.standard.set(location.coordinate.longitude, forKey: "LON_NS")
+            
+            UserDefaults().synchronize()
+            
+            let latitude = UserDefaults.standard.value(forKey: "LAT")
+            let longitude = UserDefaults.standard.value(forKey: "LON")
+            
+            DS_Service.weatherForCoord(latitude: latitude as! String, longitude: longitude as! String) { (weather, error) in
                 
                 if let weatherData = weather {
-                    self.updateInfos(with: weatherData, at: location)
-                    
+                    self.updateInfos(with: weatherData, at: location)  
                 }
                 
                 else if let _ = error {
@@ -71,15 +76,17 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             self.currentCity.text = locationName
         }
 
-        self.currentTemp.text = data.convertFarhenToCelsius(temp: data.temperature) + "°C"
+        self.currentTemp.text = convertFarhenToCelsius(temp: data.temperature) + "°C"
         self.currentState.text = data.summary.uppercased()
-        self.currentDate.text = data.currentDate
-        self.currentStateIMG = self.change(with: data)
-        //self.currentStateIMG.text = data.icon
-        self.feelsLikeTemp.text =  data.convertFarhenToCelsius(temp:data.feelsLikeTemp) + "°C"
+        self.currentDate.text = data.convertUnixTime(timestamp: data.currentDate) as? String
+        //print(data.convertUnixTime(timestamp: data.currentDate))
+        self.currentStateIMG.image = UIImage(named: changeImageAccordingToCurrentWeather(with: data.icon))
+        self.feelsLikeTemp.text = convertFarhenToCelsius(temp: data.feelsLikeTemp) + "°C"
         self.humidity.text = data.humidity + "%"
         self.wind.text = data.windSpeed + " Km/h"
         self.visibility.text = data.visibility + " Km"
+        self.greetingsText.text = changeGreetings()
+        self.currentDay.text = getCurrentDay()
     }
 
     func handleError(message: String) {
@@ -88,58 +95,81 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func change(with data: Weather) -> UIImageView {
-        let rainy = "rainy"
-        let smallCloudsInNight = "blue_cloudy"
-        let smallCloudsInDay = "yellow_cloudy"
-        let snowStormWithClouds = "snow"
-        let stormcoming = "stormcoming"
-        let snowstorm = "sunnyandverysnowy"
-        let plentyOfCloudsInDay = "verycloudyyellow"
-        let sunIsLife = "yellow_sun"
-        let moonIsLifeToo = "blue_sun"
-        let iLoveClouds = "partiallycloudyyellow"
-        let image: UIImage
-        let imageView: UIImageView
+    
+   
+    
+    func changeGreetings() -> String {
+        let date = NSDate()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH"
+        let currentHour = Int(dateFormatter.string(from: date as Date))!
         
-        switch data.icon {
-        case "cloudy":
-            image = UIImage(named: iLoveClouds)!
-            imageView = UIImageView(image: image)
-        case "rain":
-            image = UIImage(named: rainy)!
-            imageView = UIImageView(image: image)
-        case "partly-cloudy-day":
-            image = UIImage(named: smallCloudsInDay)!
-            imageView = UIImageView(image: image)
-        case "partly-cloudy-night":
-            image = UIImage(named: smallCloudsInNight)!
-            imageView = UIImageView(image: image)
-        case "clear-day":
-            image = UIImage(named: sunIsLife)!
-            imageView = UIImageView(image: image)
-        case "clear-night":
-            image = UIImage(named: moonIsLifeToo)!
-            imageView = UIImageView(image: image)
-        case "snow":
-            image = UIImage(named: snowstorm)!
-            imageView = UIImageView(image: image)
-        case "sleet":
-            image = UIImage(named: snowStormWithClouds)!
-            imageView = UIImageView(image: image)
-        case "wind":
-            image = UIImage(named: stormcoming)!
-            imageView = UIImageView(image: image)
-        case "fog":
-            image = UIImage(named: plentyOfCloudsInDay)!
-            imageView = UIImageView(image: image)
-        default:
-            image = UIImage(named: iLoveClouds)!
-            imageView = UIImageView(image: image)
+        if(currentHour < 12){
+            return "MORNING"
+            
         }
-        
-        return imageView
+        if(currentHour < 17){
+            return "AFTERNOON"
+        }
+        else if(currentHour < 21){
+            return "EVENING"
+        }
+        else{
+            return "NIGHT"
+        }
     }
 
+    func getCurrentDay() -> String {
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd"
+        
+        dateFormatter.dateFormat = "EEEE"
+        let currentDateString: String = dateFormatter.string(from: date)
+       
+        return currentDateString.uppercased()
+    }
+    
+   
+}
 
+func changeImageAccordingToCurrentWeather(with data: String) -> String {
+    let rainy = "rainy"
+    let smallCloudsInNight = "blue_cloudy"
+    let smallCloudsInDay = "yellow_cloudy"
+    let snowStormWithClouds = "snow"
+    let stormcoming = "stormcoming"
+    let snowstorm = "sunnyandverysnowy"
+    let plentyOfCloudsInDay = "verycloudyyellow"
+    let sunIsLife = "yellow_sun"
+    let moonIsLifeToo = "blue_sun"
+    let iLoveClouds = "partiallycloudyyellow"
+    let image: String
+    
+    switch data {
+    case "cloudy":
+        image = iLoveClouds
+    case "rain":
+        image = rainy
+    case "partly-cloudy-day":
+        image =  smallCloudsInDay
+    case "partly-cloudy-night":
+        image =  smallCloudsInNight
+    case "clear-day":
+        image =  sunIsLife
+    case "clear-night":
+        image =  moonIsLifeToo
+    case "snow":
+        image =  snowstorm
+    case "sleet":
+        image =  snowStormWithClouds
+    case "wind":
+        image =  stormcoming
+    case "fog":
+        image =  plentyOfCloudsInDay
+    default:
+        image =  iLoveClouds
+    }
+    
+    return image
 }

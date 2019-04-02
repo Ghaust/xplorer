@@ -13,6 +13,8 @@ class DS_Service {
     private static let url = "https://api.darksky.net/forecast/"
     private static let api_key = "3acf126226f53c64b49e1927df2848a7"
     
+    
+    
     //fonction qui retourne un objet de type Weather en fonction des coordonnées géographiques envoyées
     static func weatherForCoord(latitude: String, longitude: String, completion: @escaping (Weather?, Error?) -> ()) {
         
@@ -27,4 +29,6 @@ class DS_Service {
             }
         }
     }
+    
+   
 }
