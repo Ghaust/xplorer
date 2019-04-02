@@ -51,5 +51,5 @@ I used the dark sky API in order to fetch weather's info.
 <img src="img/demo.gif" alt="demo">
 
 
-<i> First page of the app inspired by <a href="https://etapes.com/gabriel-nazoa-weather-app/#&gid=1&pid=1">Gabriel Nazoa</a> </i>
+<i> First page of the app inspired by <a href="https://etapes.com/gabriel-nazoa-weather-app/#&gid=1&pid=1">Gabriel Nazoa</a> </i> <br/>
 ps: I was forced to recreated all the icons with Photoshop since the quality wasn't good with a screen of the screen of Gabriel
