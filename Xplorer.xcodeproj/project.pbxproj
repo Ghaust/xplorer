@@ -8,18 +8,29 @@
 
 /* Begin PBXBuildFile section */
 		9C777F80CB2C673574440CA6 /* Pods_Xplorer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE50620BA0FA6E2B57A241E1 /* Pods_Xplorer.framework */; };
+		C17B783B2253572D009E0346 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B78392253572D009E0346 /* WeatherData.swift */; };
+		C17B783C2253572D009E0346 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B783A2253572D009E0346 /* Weather.swift */; };
+		C17B784022535739009E0346 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B783D22535739009E0346 /* MainViewController.swift */; };
+		C17B784122535739009E0346 /* DS_Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B783E22535739009E0346 /* DS_Service.swift */; };
+		C17B784222535739009E0346 /* WTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B783F22535739009E0346 /* WTableViewController.swift */; };
+		C17B784722535748009E0346 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C17B784322535748009E0346 /* Main.storyboard */; };
+		C17B784822535748009E0346 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C17B784522535748009E0346 /* LaunchScreen.storyboard */; };
 		C1C746222200727200E66293 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C746212200727200E66293 /* AppDelegate.swift */; };
 		C1C746292200727400E66293 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1C746282200727400E66293 /* Assets.xcassets */; };
-		C1C7463822008A1B00E66293 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C1C7463722008A1B00E66293 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4F3CB3EBB3090CFA75392568 /* Pods-Xplorer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Xplorer.debug.xcconfig"; path = "Target Support Files/Pods-Xplorer/Pods-Xplorer.debug.xcconfig"; sourceTree = "<group>"; };
+		C17B78392253572D009E0346 /* WeatherData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		C17B783A2253572D009E0346 /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		C17B783D22535739009E0346 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		C17B783E22535739009E0346 /* DS_Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DS_Service.swift; sourceTree = "<group>"; };
+		C17B783F22535739009E0346 /* WTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTableViewController.swift; sourceTree = "<group>"; };
+		C17B784422535748009E0346 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C17B784622535748009E0346 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C1C7461E2200727200E66293 /* Xplorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Xplorer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1C746212200727200E66293 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1C746282200727400E66293 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C1C7462D2200727400E66293 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C1C7463722008A1B00E66293 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		F5428D904DBA3C66956A168A /* Pods-Xplorer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Xplorer.release.xcconfig"; path = "Target Support Files/Pods-Xplorer/Pods-Xplorer.release.xcconfig"; sourceTree = "<group>"; };
 		FE50620BA0FA6E2B57A241E1 /* Pods_Xplorer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Xplorer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -56,7 +67,6 @@
 		C1C746152200727200E66293 = {
 			isa = PBXGroup;
 			children = (
-				C1C7463722008A1B00E66293 /* Default-568h@2x.png */,
 				C1C746202200727200E66293 /* Xplorer */,
 				C1C7461F2200727200E66293 /* Products */,
 				3DD0DE0114085F9E43EDC1B6 /* Pods */,
@@ -75,7 +85,6 @@
 		C1C746202200727200E66293 /* Xplorer */ = {
 			isa = PBXGroup;
 			children = (
-				C1C7462D2200727400E66293 /* Info.plist */,
 				C1C74636220072A200E66293 /* Supporting Files */,
 				C1C746352200729B00E66293 /* Model */,
 				C1C746332200728500E66293 /* Controller */,
@@ -87,6 +96,9 @@
 		C1C746332200728500E66293 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				C17B783E22535739009E0346 /* DS_Service.swift */,
+				C17B783D22535739009E0346 /* MainViewController.swift */,
+				C17B783F22535739009E0346 /* WTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -94,6 +106,8 @@
 		C1C746342200729200E66293 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C17B784522535748009E0346 /* LaunchScreen.storyboard */,
+				C17B784322535748009E0346 /* Main.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -101,6 +115,8 @@
 		C1C746352200729B00E66293 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C17B783A2253572D009E0346 /* Weather.swift */,
+				C17B78392253572D009E0346 /* WeatherData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -174,7 +190,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C1C7463822008A1B00E66293 /* Default-568h@2x.png in Resources */,
+				C17B784722535748009E0346 /* Main.storyboard in Resources */,
+				C17B784822535748009E0346 /* LaunchScreen.storyboard in Resources */,
 				C1C746292200727400E66293 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -192,16 +209,14 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Xplorer/Pods-Xplorer-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -237,11 +252,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C17B783B2253572D009E0346 /* WeatherData.swift in Sources */,
+				C17B783C2253572D009E0346 /* Weather.swift in Sources */,
 				C1C746222200727200E66293 /* AppDelegate.swift in Sources */,
+				C17B784222535739009E0346 /* WTableViewController.swift in Sources */,
+				C17B784022535739009E0346 /* MainViewController.swift in Sources */,
+				C17B784122535739009E0346 /* DS_Service.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		C17B784322535748009E0346 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C17B784422535748009E0346 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		C17B784522535748009E0346 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C17B784622535748009E0346 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C1C7462E2200727400E66293 /* Debug */ = {

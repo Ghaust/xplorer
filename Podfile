@@ -8,7 +8,6 @@ target 'Xplorer' do
 
   # Pods for Xplorer
   pod 'Alamofire', '~> 4.7'
-  pod 'ObjectMapper', '~> 3.4.2'
-  pod 'AlamofireObjectMapper', '~> 5.2'
+  pod 'SwiftyJSON'
 
 end
