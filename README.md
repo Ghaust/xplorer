@@ -1,7 +1,7 @@
 # Xplorer 
 # Weather App
 
-## Présentation
+## Introduction
 
 Mobile project developed for iOS with the Swift language.
 
