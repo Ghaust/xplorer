@@ -37,7 +37,7 @@ I used the dark sky API in order to fetch weather's info.
 
 ### Weather of your current location
 
-<img src="img/screen_neuilly.jpeg" alt="paris" width="247" height="512"> &nbsp <img src="img/screen_levallois.PNG" alt="levallois" width="247" height="512">
+<img src="img/screen_neuilly.jpeg" alt="paris" width="247" height="512">     <img src="img/screen_levallois.PNG" alt="levallois" width="247" height="512">
 
 On this screen, you can see :
 - Your current location (name of the city)
@@ -49,7 +49,8 @@ On this screen, you can see :
 
 ### Weather of the week of your current location or the location you want
 
-<img src="img/IMG_5479.PNG" alt="tokyo" width="247" height="512"> <p>&nbsp;</p> <img src="img/IMG_5480.PNG" alt="beijing" width="247" height="512"> <p>&nbsp;</p>  <img src="img/IMG_5481.PNG" alt="dubai" width="247" height="512"> 
+<pre>
+<img src="img/IMG_5479.PNG" alt="tokyo" width="247" height="512">     <img src="img/IMG_5480.PNG" alt="beijing" width="247" height="512">     <img src="img/IMG_5481.PNG" alt="dubai" width="247" height="512"> </pre>
 
 On this screen, you can see :
 - A search bar that can be used to name a place (city, country, address...)
