@@ -5,7 +5,6 @@
 //  Created by Joseph-Emmanuel Banzio on 25/03/2019.
 //  Copyright © 2019 Joseph-Emmanuel Banzio. All rights reserved.
 //
-
 import UIKit
 import CoreLocation
 
@@ -14,7 +13,7 @@ class WTableViewController: UITableViewController, UISearchBarDelegate {
     @IBOutlet weak var searchBar: UISearchBar!
     
     var weathers = [WeatherData]()
- 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -76,7 +75,7 @@ class WTableViewController: UITableViewController, UISearchBarDelegate {
         return 1
     }
     
-  
+    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let currentDate = Calendar.current.date(byAdding: .day, value: section, to: Date())
         let dateFormatter = DateFormatter()
@@ -86,7 +85,7 @@ class WTableViewController: UITableViewController, UISearchBarDelegate {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "wCell", for: indexPath)
-       let weatherData = weathers[indexPath.section]
+        let weatherData = weathers[indexPath.section]
         
         cell.textLabel?.text = weatherData.summary
         let temp = convertFarhenToCelsius(temp: String(weatherData.temperature))
@@ -107,5 +106,5 @@ class WTableViewController: UITableViewController, UISearchBarDelegate {
         return currentDateString.uppercased()
     }
     
-
+    
 }
